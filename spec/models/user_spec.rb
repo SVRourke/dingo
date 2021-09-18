@@ -44,6 +44,14 @@ RSpec.describe User do
 
       expect(Image.all.count).to eql 0
     end
+
+    example "a user's tags are deleted when their account is" do
+      user = User.create(username: "sam", password: "password")
+      user.tags.create(name: "outdoors")
+      user.tags.create(name: "family")
+      user.destroy
+      expect(Tag.count).to eql 0
+    end
   end
   # pending "add some more to #{__FILE__}"
 end
