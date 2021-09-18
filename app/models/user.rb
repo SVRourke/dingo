@@ -5,6 +5,6 @@ class User < ApplicationRecord
     validates :username, uniqueness: {message: "That username is already taken."}
     validates :password, length: {minimum: 8, message: "Password must be at least 8 characters long."}
 
-    has_many :images
+    has_many :images, dependent: :destroy
 
 end
