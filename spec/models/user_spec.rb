@@ -4,17 +4,15 @@ RSpec.describe User do
   context "User" do
     example "can create a valid record" do
       user = User.create(username: "SVRourke", password: "BlahBlahBlah")
-      expect(user.valid?).to be false
+      expect(user.valid?).to be true
     end
     example "is invalid without username" do
       user = User.create(username: "", password: "password")
-      puts "hello"
       expect(user.valid?).to be false
     end
     example "is invalid with a duplicate username" do
       User.create(username: "SAM", password: "password")
       user = User.create(username: "SAM", password: "password")
-      puts "hello"
       expect(user.valid?).to be false
     end
     example "is invalid without password" do
@@ -27,5 +25,5 @@ RSpec.describe User do
       expect(user.valid?).to be false
     end
   end
-  pending "add some examples to (or delete) #{__FILE__}"
+  # pending "add some more to #{__FILE__}"
 end
