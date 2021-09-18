@@ -7,6 +7,7 @@
     <tr>
         <td><%= image.id %></td>
         <td><%= image.caption %></td>
+        <td><%= link_to 'view', image_path(image) %></td>
     </tr>
 <% end %>
 </table>
