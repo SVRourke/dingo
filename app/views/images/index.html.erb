@@ -1,0 +1,12 @@
+<table>
+    <tr>
+        <td>image:</td>
+        <td>caption:</td>
+    </tr>
+<% @images.each do |image| %>
+    <tr>
+        <td><%= image.id %></td>
+        <td><%= image.caption %></td>
+    </tr>
+<% end %>
+</table>
