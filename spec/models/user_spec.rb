@@ -24,6 +24,26 @@ RSpec.describe User do
       user = User.create(username: "SAMUEL", password: "1234567")
       expect(user.valid?).to be false
     end
+
+    example "has many images" do
+      user = User.create(username: "SVRourke", password: "password1234")
+      3.times do
+        user.images.build(caption: "one")
+      end
+      user.save()
+      expect(user.images.count).to eql 3
+    end
+    
+    example "prevent orphan images when a user is deleted" do
+      user = User.create(username: "sam rourke", password: "mangosmoothie")
+      3.times do
+        user.images.build(caption: "laskjfswjflkwjfe")
+      end
+      user.save()
+      user.destroy()
+
+      expect(Image.all.count).to eql 0
+    end
   end
   # pending "add some more to #{__FILE__}"
 end
