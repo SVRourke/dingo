@@ -6,5 +6,6 @@ class User < ApplicationRecord
     validates :password, length: {minimum: 8, message: "Password must be at least 8 characters long."}
 
     has_many :images, dependent: :destroy
+    has_many :tags, dependent: :destroy
 
 end
