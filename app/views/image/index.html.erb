@@ -5,6 +5,7 @@
     </tr>
 <% @images.each do |image| %>
     <tr>
+        <td><%= image_tag image.image_file.variant(resize: "200") %></td>
         <td><%= image.id %></td>
         <td><%= image.caption %></td>
         <td><%= link_to "view", user_image_path(@user, image) %></td>
