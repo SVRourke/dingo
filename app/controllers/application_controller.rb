@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
     def authorized_redirect
-        redirect_to image_index_path if !logged_in?
+        redirect_to user_image_index_path(current_user) if !logged_in?
     end
 
     def logged_in?
