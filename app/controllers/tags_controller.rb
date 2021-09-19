@@ -18,6 +18,29 @@ class TagsController < ApplicationController
 
     def show
     end
-    # add-image
-    # remove-image
+ 
+    def add
+        @image = Image.find(params[:image_id])
+        @tag = Tag.find(params[:id])
+
+        @image.tags.push(@tag)
+
+        redirect_to user_tags_path(current_user)        
+    end
+
+    def remove
+        @image = Image.find(params[:image_id])
+        @tag = Tag.find(params[:id])
+
+        @image.tags.delete(@tag)
+        byebug
+
+        redirect_to user_tags_path(current_user)
+    end
+
+    private
+
+    def tag_params
+        params.require(:tag).permit(:name)
+    end
 end
