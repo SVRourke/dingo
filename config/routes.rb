@@ -7,7 +7,15 @@ Rails.application.routes.draw do
   delete 'logout', to: 'auth#destroy'
 
   resources :users, only: [:new, :create, :destroy] do
-    resources :image
+    resources :image, only: [:new, :create, :show, :edit, :destroy, :index] do
+      resources :tags, except: [:new, :edit, :show, :update, :destroy] do
+        member do
+          post "add", to: "tags#add"
+          post "remove", to: "tags#remove"
+        end        
+      end
+
+    end
     resources :tags
   end
 end
