@@ -32,8 +32,7 @@ class TagsController < ApplicationController
         @image = Image.find(params[:image_id])
         @tag = Tag.find(params[:id])
 
-        @image.tags.delete(@tag)
-
+        @image.tags.destroy(@tag)
         redirect_to user_tags_path(current_user)
     end
 
