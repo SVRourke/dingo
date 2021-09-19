@@ -1,12 +1,19 @@
+
+<h4>Create a tag!</h4>
+<%= render partial: "forms/new_tag.html.erb", locals: { user: @user } %>
+
 <table>
-    <th>
+    <tr>
         <td>name</td>
-        <td>image count</td>
-    </th>
+        <td>images</td>
+        <td>count</td>
+    </tr>
     <% @tags.each do |tag| %>
         <tr>
             <td><%= tag.name %></td>
+            <td><%= link_to "images", user_tag_path(@user, tag) %></td>
             <td><%= tag.images.count %></td>
+            <td><%= render partial: "forms/delete_tag", locals: { tag: tag } %></td>
         </tr>
     <% end %>
 </table>
