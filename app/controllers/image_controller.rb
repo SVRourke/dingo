@@ -21,6 +21,7 @@ class ImageController < ApplicationController
 
   def show
     @user = current_user
+    @tags = Tag.all
     @image = Image.find(params[:id])
   end
 
