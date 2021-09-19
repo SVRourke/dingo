@@ -4,6 +4,7 @@
         <tr>
             <td><%= image.id %></td>
             <td><%= image.caption %></td>
+            <td><%= link_to "view", user_image_path(@user, image) %>
         </tr>
     <% end %>
 </table>
