@@ -1,0 +1,7 @@
+<%= form_with scope: @tag do |f| %>
+<%= f.fields_for :tag do |tag| %>
+<%= tag.label :name %>
+<%= tag.text_field :name %>
+<% end %>
+<%= f.submit "create tag" %>
+<% end %>
