@@ -11,7 +11,7 @@ class AuthController < ApplicationController
           redirect_to image_index_path
         else
           flash[:error] = "Something went wrong"
-          render 'new'
+          redirect_to login_path
         end
     end
     
