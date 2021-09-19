@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   post 'login', to: 'auth#create'
   delete 'logout', to: 'auth#destroy'
 
-  resources :user, only: [:new, :create, :destroy]
-  resources :image
+  resources :users, only: [:new, :create, :destroy] do
+    resources :image
+    resources :tags
+  end
 end
