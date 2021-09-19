@@ -8,7 +8,7 @@ class AuthController < ApplicationController
         if @user.authenticate(params[:password])
           flash[:success] = "logged in"
           session[:user_id] = @user.id
-          redirect_to image_index_path
+          redirect_to user_image_index_path(@user)
         else
           flash[:error] = "Something went wrong"
           redirect_to login_path

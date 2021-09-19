@@ -13,7 +13,9 @@ class ImageController < ApplicationController
     def create
         @image = current_user.images.create(image_params)
         if @image.valid?
-            redirect_to image_index_path
+            redirect_to user_image_index_path(current_user)
+        else
+            redirect_to :back
         end
     end
 

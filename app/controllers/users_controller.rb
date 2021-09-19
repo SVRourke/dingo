@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 
     def new
-        # authorized_redirect
         @user = User.new
     end
     
@@ -10,7 +9,7 @@ class UsersController < ApplicationController
         @user = User.create(user_params)
         if @user.valid?
             session[:user_id] = @user.id
-            redirect_to image_index_path
+            redirect_to user_image_index_path(@user)
         else
             flash[:error] = @user.error_messages
             redirect_back
