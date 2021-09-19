@@ -1,0 +1,9 @@
+<h4><%= @tag.name %></h4>
+<table>
+    <% @images.each do |image| %>
+        <tr>
+            <td><%= image.id %></td>
+            <td><%= image.caption %></td>
+        </tr>
+    <% end %>
+</table>
