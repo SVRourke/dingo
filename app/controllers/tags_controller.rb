@@ -1,44 +1,54 @@
 class TagsController < ApplicationController
-    def index
-        @tags = current_user.tags
+  def index
+    @tags = current_user.tags
+  end
+
+  def new
+    @tag = Tag.new
+  end
+
+  def create
+    @user = current_user
+    @tag = @user.tags.create(tag_params)
+    if @tag.valid?
+      redirect_to user_tags_path(@user)
+    else
+      redirect_to user_tags_path(@user)
     end
-    
-    def new
-        @tag = Tag.new
-    end
+  end
 
-    def create
-        @tag = current_user.tags.create(tag_params)
-        if @tag.valid?
-            redirect_to user_tags_path(current_user)
-        else
-            redirect_to :back
-        end
-    end
+  def show
+    @user = current_user
+    @tag = Tag.find(params[:id])
+    @images = @tag.images
+  end
 
-    def show
-    end
- 
-    def add
-        @image = Image.find(params[:image_id])
-        @tag = Tag.find(params[:id])
+  def destroy
+    @user = current_user
+    Tag.find(params[:id]).destroy
+    redirect_to user_tags_path(@user)
+  end
 
-        @image.tags.push(@tag)
+  def add
+    @image = Image.find(params[:image_id])
+    @tag = Tag.find(params[:id])
 
-        redirect_to user_tags_path(current_user)        
-    end
+    @image.tags.push(@tag)
 
-    def remove
-        @image = Image.find(params[:image_id])
-        @tag = Tag.find(params[:id])
+    redirect_to user_image_path(current_user, @image)
+  end
 
-        @image.tags.destroy(@tag)
-        redirect_to user_tags_path(current_user)
-    end
+  def remove
+    @image = Image.find(params[:image_id])
+    @tag = Tag.find(params[:id])
 
-    private
+    @image.tags.destroy(@tag)
+    redirect_to user_image_path(current_user, @image)
+  end
 
-    def tag_params
-        params.require(:tag).permit(:name)
-    end
+  private
+
+  def tag_params
+    params.require(:tag).permit(:name)
+  end
 end
