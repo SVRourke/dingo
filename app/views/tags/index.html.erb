@@ -1,0 +1,12 @@
+<table>
+    <th>
+        <td>name</td>
+        <td>image count</td>
+    </th>
+    <% @tags.each do |tag| %>
+        <tr>
+            <td><%= tag.name %></td>
+            <td><%= tag.images.count %></td>
+        </tr>
+    <% end %>
+</table>
