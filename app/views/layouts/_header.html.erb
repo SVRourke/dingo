@@ -1,0 +1,8 @@
+<header>
+    <h1>Hello <%= @user.username %></h1>
+    <nav>
+      <%= link_to "New Image", new_user_image_path(@user) %>
+      <%= link_to "images", user_image_index_path(@user) %>
+      <%= link_to "tags", user_tags_path(@user) %>
+    </nav>
+</header>
