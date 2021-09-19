@@ -20,17 +20,21 @@ RSpec.describe "Auth", type: :request do
     end
 
     it "POST: valid creds logs a user in" do
-      User.create(username: "sam", password: "password")
+      @user = User.create(username: "sam", password: "password")
       post login_path, params: { username: "sam", password: "password"}
-      expect(response).to redirect_to(:image_index)  
+      expect(session[:user_id]).to eql @user.id
     end
   end
   
   context "Logout" do
     it "DELETE: logs a user out" do
-      User.create(username: "sam", password: "password")
+      @user = User.create(username: "sam", password: "password")
+      
       post login_path, params: { username: "sam", password: "password"}
-      expect(response).to redirect_to(:image_index)  
+      expect(session[:user_id]).to eql @user.id
+      
+      delete logout_path
+      expect(session[:user_id]).to eql nil
     end
   end
     
