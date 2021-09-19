@@ -33,7 +33,6 @@ class TagsController < ApplicationController
         @tag = Tag.find(params[:id])
 
         @image.tags.delete(@tag)
-        byebug
 
         redirect_to user_tags_path(current_user)
     end
