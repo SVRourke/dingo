@@ -1,2 +1,11 @@
-<%# <%= image_tag %> %>
-<h3><%= @image.caption %></h3>
+<%= image_tag @image.image_file %>
+<h3>caption: <%= @image.caption %></h3>
+
+<h5>add tags:</h5>
+<% @tags.each do |tag| %>
+    <% if !@image.tags.include?(tag) %>
+        <%= render partial: "forms/add_tag_button", locals: { user: @user, image: @image, tag: tag } %>
+    <% else %>
+        <%= render partial: "forms/remove_tag_button", locals: { user: @user, image: @image, tag: tag } %>
+    <% end %>
+<% end %>
