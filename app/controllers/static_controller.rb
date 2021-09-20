@@ -1,7 +1,8 @@
 class StaticController < ApplicationController
+  before_action :authorized_redirect
+  
   def welcome
     @disable_heading = true
-    # authorized_redirect
     render :welcome
   end
 end
