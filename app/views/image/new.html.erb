@@ -1,13 +1,38 @@
-<h4>New Image</h4>
 
-<%= form_with url: user_image_index_path do |f| %>
-<%= f.fields_for :image do |i| %>
-    <%= i.label :image_file %>
-    <%= i.file_field :image_file %>
-    <%= i.label :caption %>
-    <%= i.text_field :caption %>
-    <%= i.collection_check_boxes :tag_ids, @tags, :id, :name %>
 
-<% end %>
-    <%= f.submit "Upload Image" %>
-<% end %>
+
+
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="height: 90vh">
+        <div class="col-lg-4 col-md-5 col-sm-8 card">
+        <div class="card-body">
+        <h1 class="mb-4">New Upload</h1>
+
+            <%= form_with url: user_image_index_path do |f| %>
+                <%= f.fields_for :image do |i| %>
+                    <div class="form-group mt-2">
+                        <label for="formFileSm" class="form-label">Small file input example</label>
+                        <%= i.file_field :image_file, class: "form-control form-control-sm" %>
+                    </div>
+            
+                    <div class="form-group mt-2">
+                        <%= i.label :caption %>
+                        <%= i.text_field :caption, class: "form-control" %>
+                    </div>
+                    <div class="form-group mt-3 mb-2">
+                        <%= i.collection_check_boxes(:tag_ids, @tags, :id, :name) do |b| %>
+                            <div class="form-check">
+                                <%= b.label class: "form-check-label" %>
+                                <%= b.check_box class: "form-check-input" %>
+                            </div>
+                        <% end %>
+                    <div class="form-group mt-3 mb-2">
+                        <%= f.submit "Upload", class: "btn btn-primary" %>
+                    </div>
+                <% end %>
+            <% end %>
+
+        </div>
+        </div>
+    </div>
+</div>

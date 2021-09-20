@@ -1,4 +1,4 @@
 
 <%= form_with scope: Image, method: "delete", url: user_image_path(@user.id, image.id) do |f| %>
-    <%= f.submit "Delete Image" %>
+    <%= f.submit "Delete Image", class: "btn btn-primary" %>
 <% end %>
