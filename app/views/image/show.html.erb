@@ -1,11 +1,50 @@
-<%= image_tag @image.image_file %>
-<h3>caption: <%= @image.caption %></h3>
+<div class="row justify-content-center">
+    <div class="col col-lg-8 col-md-6 col-sm-12">
+        <%= image_tag @image.image_file, class: "img-fluid show-image" %>
+    </div>
+    <div class="col col-lg-4 col-md-6 col-sm-8 col-12 mt-4">
+        <div class="card pt-3 pb-3 ps-3">
+            <div class="">
+                <h3><%= @image.caption %></h3>
+                <p>uploaded: <%= @image.created_at %></p>
+            </div>
 
-<h5>add tags:</h5>
-<% @tags.each do |tag| %>
-    <% if !@image.tags.include?(tag) %>
-        <%= render partial: "forms/add_tag_button", locals: { user: @user, image: @image, tag: tag } %>
-    <% else %>
-        <%= render partial: "forms/remove_tag_button", locals: { user: @user, image: @image, tag: tag } %>
-    <% end %>
-<% end %>
+            <h5>tags:</h5>
+            <div class="flex">
+                <% @image.tags.each do |tag| %>
+                    <%= link_to user_tag_path(@user, tag) do %>
+                        <p class = "badge bg-success">
+                        <%= tag.name %>
+                        </p>
+                    <% end %>
+                <% end %>
+            </div>
+            <div class="row"></div>
+
+            <h5>add tags:</h5>
+            <div class="flex">
+                <% @tags.each do |tag| %>
+                    <% if !@image.tags.include?(tag) %>
+                        <%= link_to add_user_image_tag_path(@user, @image, tag), method: :post do %>
+                            <p class = "badge bg-secondary">
+                                + <%= tag.name %>
+                            </p>
+                        <% end %>
+                        
+                    <% else %>
+                        <%= link_to remove_user_image_tag_path(@user, @image, tag), method: :post do %>
+                            <p class = "badge bg-danger">
+                                - <%= tag.name %>
+                            </p>
+                        <% end %>
+                    <% end %>
+                <% end %>
+            </div>
+
+            <h5>Danger</h5>
+            <%= link_to user_image_path(@user), method: :delete do %>
+                <p class="btn btn-danger">Delete Image</p>
+            <% end %>
+        </div>
+    </div>
+</div>
