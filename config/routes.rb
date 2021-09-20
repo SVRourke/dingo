@@ -16,6 +16,9 @@ Rails.application.routes.draw do
       end
 
     end
-    resources :tags
+    resources :tags, only: [:index, :create, :show, :destroy]
   end
+  match "*unmatched", to: 'static#welcome', via: :all, constraints: lambda { |req|
+    req.path.exclude? 'rails/active_storage'
+  }
 end
