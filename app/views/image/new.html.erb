@@ -1,8 +1,11 @@
-
-
-
+<% content_for :page_title do %>
+    Upload
+<% end %>
 
 <div class="container">
+    <div class="col-4 mt-4">
+        <%= render partial: "partials/flash_message" %>
+    </div>
     <div class="row justify-content-center align-items-center" style="height: 90vh">
         <div class="col-lg-4 col-md-5 col-sm-8 card">
         <div class="card-body">
