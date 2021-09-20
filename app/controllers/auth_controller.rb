@@ -1,4 +1,8 @@
 class AuthController < ApplicationController
+  before_action :authorized_redirect
+  skip_before_action :authorized_redirect, only: :destroy
+
+
   def new
     @disable_heading = true
   end
