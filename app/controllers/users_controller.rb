@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  before_action :unauthorized_redirect
+
+  skip_before_action :unauthorized_redirect, only: :destroy
+
   def new
     @disable_heading = true
     @user = User.new
