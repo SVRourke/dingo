@@ -1,19 +1,39 @@
+<div class="container col-lg-6 mt-4">
 
-<h4>Create a tag!</h4>
-<%= render partial: "forms/new_tag.html.erb", locals: { user: @user } %>
+    <table class="table col-lg-6">
+        <thead>
+            <tr>
+                <th scope="col">Tag</th>
+                <th scope="col">Images</th>
+            </tr>
+        </thead>
+        <% @tags.each do |tag| %>
+            <tr>
+                <td><%= link_to tag.name, user_tag_path(@user, tag) %></td>
+                <td><%= tag.images.count %></td>
+            </tr>
+        <% end %>
+    </table>
 
-<table>
-    <tr>
-        <td>name</td>
-        <td>images</td>
-        <td>count</td>
-    </tr>
-    <% @tags.each do |tag| %>
-        <tr>
-            <td><%= tag.name %></td>
-            <td><%= link_to "images", user_tag_path(@user, tag) %></td>
-            <td><%= tag.images.count %></td>
-            <td><%= render partial: "forms/delete_tag", locals: { tag: tag } %></td>
-        </tr>
-    <% end %>
-</table>
+    <!-- Button trigger modal -->
+    <button id="new-tag" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newTagModal">
+    add tag
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="newTagModal" tabindex="-1" aria-labelledby="newTagModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered col-md-6">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="newTagModalLabel">Create Tag</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <%= render partial: "forms/new_tag.html.erb", locals: { user: @user } %>
+        </div>
+        
+        </div>
+    </div>
+    </div>
+</div>
+                <% # render partial: "forms/delete_tag", locals: { tag: tag } %> 
