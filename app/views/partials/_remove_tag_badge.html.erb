@@ -1,0 +1,5 @@
+<%= link_to remove_user_image_tag_path(@user, @image, tag), method: :post do %>
+    <p class = "badge bg-danger">
+        - <%= tag.name %>
+    </p>
+<% end %>
