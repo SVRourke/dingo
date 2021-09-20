@@ -1,5 +1,5 @@
 <h4><%= @tag.name %></h4>
-<%= render partial: "forms/delete_tag", locals: { tag: tag } %> 
+<%= render partial: "forms/delete_tag", locals: { user: @user, tag: @tag } %> 
 
 <div class="custom-image-grid pt-3">
     <% @images.each do |image| %>
