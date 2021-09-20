@@ -1,47 +1,43 @@
+<% content_for :page_title do %>
+    Image
+<% end %>
+
 <div class="row justify-content-center">
-    <div class="col col-lg-8 col-md-6 col-sm-12">
+    <div class="col col-lg-8 col-sm-12 col-12 mt-4">
         <%= image_tag @image.image_file, class: "img-fluid show-image" %>
     </div>
-    <div class="col col-lg-4 col-md-6 col-sm-8 col-12 mt-4">
+    <div class="col col-lg-4 col-12 mt-4">
         <div class="card pt-3 pb-3 ps-3">
-            <div class="">
-                <h3><%= @image.caption %></h3>
-                <p>uploaded: <%= @image.created_at %></p>
+            <h3><%= @image.caption %></h3>
+            <p>uploaded: <%= @image.created_at %></p>
+
+            <h5 class="mt-3">tags:</h5>
+            <div class="flex">
+                <% if @image.tags.count > 0 %>
+                    <% @image.tags.each do |tag| %>
+                        <%= render partial: "partials/tag_badge_link", locals: {user: @user, tag: tag } %>
+                    <% end %>
+                <% else %>
+                    <p>add some tags.</p>
+                <%  end %>
             </div>
 
-            <h5>tags:</h5>
+            <h5 class="mt-3">add tags:</h5>
             <div class="flex">
-                <% @image.tags.each do |tag| %>
-                    <%= link_to user_tag_path(@user, tag) do %>
-                        <p class = "badge bg-success">
-                        <%= tag.name %>
-                        </p>
-                    <% end %>
-                <% end %>
-            </div>
-            <div class="row"></div>
-
-            <h5>add tags:</h5>
-            <div class="flex">
-                <% @tags.each do |tag| %>
-                    <% if !@image.tags.include?(tag) %>
-                        <%= link_to add_user_image_tag_path(@user, @image, tag), method: :post do %>
-                            <p class = "badge bg-secondary">
-                                + <%= tag.name %>
-                            </p>
-                        <% end %>
-                        
-                    <% else %>
-                        <%= link_to remove_user_image_tag_path(@user, @image, tag), method: :post do %>
-                            <p class = "badge bg-danger">
-                                - <%= tag.name %>
-                            </p>
+                <% if @tags.count > 0 %>
+                    <% @tags.each do |tag| %>
+                        <% if !@image.tags.include?(tag) %>
+                            <%= render partial: "partials/add_tag_badge", locals: {user: @user, tag: tag, image: @image} %>
+                        <% else %>
+                            <%= render partial: "partials/remove_tag_badge", locals: {user: @user, tag: tag, image: @image} %>
                         <% end %>
                     <% end %>
+                <% else %>
+                    <p>Create tags: <%= link_to "here", user_tags_path(@user) %></p>
                 <% end %>
             </div>
 
-            <h5>Danger</h5>
+            <h5 class="mt-3">Danger</h5>
             <%= link_to user_image_path(@user), method: :delete do %>
                 <p class="btn btn-danger">Delete Image</p>
             <% end %>
