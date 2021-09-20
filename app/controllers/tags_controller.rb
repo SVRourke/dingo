@@ -1,14 +1,15 @@
 class TagsController < ApplicationController
+  before_action :unauthorized_redirect
+
   def index
-    @tags = current_user.tags
+    @user = current_user
+    authorize Tag, :index?
+    @tags = @user.tags
   end
-
-  def new
-    @tag = Tag.new
-  end
-
+  
   def create
     @user = current_user
+    authorize Tag, :create?
     @tag = @user.tags.create(tag_params)
     if @tag.valid?
       redirect_to user_tags_path(@user)
@@ -41,6 +42,7 @@ class TagsController < ApplicationController
   def remove
     @image = Image.find(params[:image_id])
     @tag = Tag.find(params[:id])
+    authorize @tag, :add?
 
     @image.tags.destroy(@tag)
     redirect_to user_image_path(current_user, @image)
