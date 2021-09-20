@@ -1,8 +1,28 @@
-<header>
-    <h1>Hello <%= @user.username %></h1>
-    <nav>
-      <%= link_to "New Image", new_user_image_path(@user) %>
-      <%= link_to "images", user_image_index_path(@user) %>
-      <%= link_to "tags", user_tags_path(@user) %>
-    </nav>
-</header>
+<nav class="navbar navbar-expand navbar-light bg-light">
+  <div class="container-fluid">
+    <h1 class="navbar-brand">
+    <% # Hello <%= @user.username %>
+
+    </h1>   
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to "images", user_image_index_path(@user), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "tags", user_tags_path(@user), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "upload", new_user_image_path(@user), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "logout", logout_path(@post), :method => :delete, class: "nav-link" %>
+        </li>
+      </ul>
+      
+    </div>
+  </div>
+</nav>
+
