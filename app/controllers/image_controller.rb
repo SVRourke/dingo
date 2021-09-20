@@ -1,4 +1,6 @@
 class ImageController < ApplicationController
+  before_action :unauthorized_redirect
+  
   def index
     @user = current_user()
     @images = @user.images
@@ -23,10 +25,12 @@ class ImageController < ApplicationController
     @user = current_user
     @tags = Tag.all
     @image = Image.find(params[:id])
+    authorize @image, :show?
   end
 
   def destroy
     @image = Image.find(params[:id])
+    authorize @image, :destroy?
     @image.destroy
     redirect_to user_image_index_path(current_user)
   end
