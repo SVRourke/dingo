@@ -1,3 +1,10 @@
+<% content_for :page_title do %>
+    Tag Index
+<% end %>
+<div class="col-4 mt-4">
+    <%= render partial: "partials/flash_message" %>
+</div>
+
 <div class="container col-lg-6 mt-4">
 
     <table class="table col-lg-6">
@@ -7,10 +14,17 @@
                 <th scope="col">Images</th>
             </tr>
         </thead>
-        <% @tags.each do |tag| %>
+        <% if @tags.length > 0 %>
+            <% @tags.each do |tag| %>
+                <tr>
+                    <td><%= link_to tag.name, user_tag_path(@user, tag) %></td>
+                    <td><%= tag.images.count %></td>
+                </tr>
+            <% end %>
+        <% else %>
             <tr>
-                <td><%= link_to tag.name, user_tag_path(@user, tag) %></td>
-                <td><%= tag.images.count %></td>
+                <td>Add Some Tags!</td>
+                <td></td>
             </tr>
         <% end %>
     </table>
