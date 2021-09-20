@@ -1,5 +1,18 @@
-<div class="custom-image-grid pt-3">
-    <% @images.each do |image| %>
-        <%= render partial: "image/image_card", locals: { image: image } %>
-    <% end %>
+<% content_for :page_title do %>
+    Image Index
+<% end %>
+<div class="col-4 mt-4">
+    <%= render partial: "partials/flash_message" %>
 </div>
+<% if @images.length > 0 %>
+    <div class="custom-image-grid pt-4">
+        <% @images.each do |image| %>
+            <%= render partial: "image/image_card", locals: { image: image } %>
+        <% end %>
+    </div>
+<% else %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <p>Upload some images! <%= link_to "here", new_user_image_path(@user) %></p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% end %>
