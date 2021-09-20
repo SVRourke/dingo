@@ -1,5 +1,17 @@
-<h4><%= @tag.name %></h4>
-<%= render partial: "forms/delete_tag", locals: { user: @user, tag: @tag } %> 
+<% content_for :page_title do %>
+    Tag: <%= @tag.name %>
+<% end %>
+
+<% content_for :additional_link do %>
+    <li class="nav-item">
+        <%= link_to "delete tag", user_tag_path(@user, @tag), :method => :delete, class: "badge badge-warning bg-warning" %>
+    </li>
+<% end %>
+
+<div class="col-4 mt-4">
+    <%= render partial: "partials/flash_message" %>
+</div>
+
 
 <div class="custom-image-grid pt-3">
     <% @images.each do |image| %>
