@@ -20,9 +20,12 @@ RSpec.describe "Users", type: :request do
 
   context "can delete a user" do
     it "DELETE: users_path deletes a user" do
-      @user = User.create(username: "sam", password: "password")
-      post login_path, params: { username: "sam", password: "password" }
+      @user = User.create(username: "joe", password: "password")
+      post login_path, params: { username: "joe", password: "password" }
+      
+      expect(session[:user_id]).to eql @user.id
       delete user_path(@user)
+      expect(response).to redirect_to :root
       expect(User.count).to eql 0
     end
   end
