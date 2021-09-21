@@ -2,7 +2,6 @@ class AuthController < ApplicationController
   before_action :authorized_redirect
   skip_before_action :authorized_redirect, only: :destroy
 
-
   def new
     @disable_heading = true
   end
@@ -16,7 +15,7 @@ class AuthController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_image_index_path(@user)
     else
-      flash[:error] = "Something went wrong"
+      flash[:error] = "Invalid credentials"
       redirect_to login_path
     end
   end
