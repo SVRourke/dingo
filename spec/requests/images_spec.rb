@@ -5,14 +5,13 @@ RSpec.describe "Images", type: :request do
   before(:each) do
     @user = User.create(username: "sam", password: "password")
     @tag = @user.tags.create(name: "outdoors")
+    @file = fixture_file_upload("/dingo.jpeg", "image/jpeg")
 
     post login_path, params: { username: "sam", password: "password" }
     expect(session[:user_id]).to eql @user.id
-
-    @file = fixture_file_upload("/dingo.jpeg", "image/jpeg")
   end
 
-  context "create image" do
+  context "validations" do
     it "can create a valid image" do
       post user_image_index_path(@user), params: { image: { caption: "blah blah blah", image_file: @file } }
       @image = Image.find_by(caption: "blah blah blah")
@@ -35,6 +34,6 @@ RSpec.describe "Images", type: :request do
   it "can show images" do
     @image = @user.images.create(caption: "hello", image_file: @file)
     get user_image_path(@user, @image)
-    expect(response.successful?).to eql true
+    expect(response).to be_successful
   end
 end
