@@ -1,6 +1,6 @@
 class ImageController < ApplicationController
   before_action :unauthorized_redirect
-  
+
   def index
     @user = current_user()
     @images = @user.images
@@ -17,6 +17,7 @@ class ImageController < ApplicationController
     if @image.valid?
       redirect_to user_image_index_path(current_user)
     else
+      flash[:error] = @image.error
       redirect_to :back
     end
   end
