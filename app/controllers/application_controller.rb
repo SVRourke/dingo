@@ -1,27 +1,27 @@
 class ApplicationController < ActionController::Base
-    include Pundit
-    rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-    
-    def unauthorized_redirect
-        redirect_to :root if !logged_in?
-    end
+  include Pundit
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-    def authorized_redirect
-        redirect_to user_image_index_path(current_user) if logged_in?
-    end
+  def unauthorized_redirect
+    redirect_to :root if !logged_in?
+  end
 
-    def logged_in?
-        session[:user_id].present? && current_user.id == session[:user_id]
-    end
+  def authorized_redirect
+    redirect_to user_image_index_path(current_user) if logged_in?
+  end
 
-    def current_user
-        @user ||= User.find(session[:user_id])
-    end
+  def logged_in?
+    session[:user_id].present?
+  end
 
-    private
+  def current_user
+    @user ||= User.find(session[:user_id])
+  end
 
-    def user_not_authorized
-        flash[:alert] = "You are not authorized to perform this action."
-        redirect_to user_image_index_path(current_user)
-    end
+  private
+
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to user_image_index_path(current_user)
+  end
 end

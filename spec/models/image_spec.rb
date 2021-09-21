@@ -1,17 +1,19 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe Image, type: :model do
-  it "creates a valid image" do
-    puts User.first
-    image = Image.create
+RSpec.describe Image do
+  context "validation" do
+    it "creates a valid image" do
+      image = Image.create(caption: "hello")
+    end
   end
 
-  it "has many tags" do
-    user = User.create(username: "SVROURKE", password: "password")
-    img = user.images.create(caption: "vlbajofjsf")
-    tag = user.tags.create(name: "outdoors")
-    img.tags.push(tag)
-    expect(img.tags.count).to eql 1
+  context "tags" do
+    it "has many tags" do
+      user = User.create(username: "SVROURKE", password: "password")
+      img = user.images.create(caption: "vlbajofjsf")
+      tag = user.tags.create(name: "outdoors")
+      img.tags.push(tag)
+      expect(img.tags.count).to eql 1
+    end
   end
-  # pending "add some examples to check attached file #{__FILE__}"
 end
