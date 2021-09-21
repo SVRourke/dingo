@@ -2,16 +2,14 @@ require "rails_helper"
 require "spec_helper"
 
 RSpec.describe "Images", type: :request do
- 
   before(:each) do
     @user = User.create(username: "sam", password: "password")
     @tag = @user.tags.create(name: "outdoors")
-    
+
     post login_path, params: { username: "sam", password: "password" }
     expect(session[:user_id]).to eql @user.id
-    # @file = Rack::Test::UploadedFile.new("#{Rails.root}/spec/fixtures/files/dingo.jpeg", "image/jpeg")
 
-    @file = fixture_file_upload('/dingo.jpeg', "image/jpeg")
+    @file = fixture_file_upload("/dingo.jpeg", "image/jpeg")
   end
 
   context "create image" do
@@ -35,8 +33,8 @@ RSpec.describe "Images", type: :request do
   end
 
   it "can show images" do
-    @image = @user.images.create(caption: "hello", image_file: @image)
+    @image = @user.images.create(caption: "hello", image_file: @file)
     get user_image_path(@user, @image)
-    expect(response).to be_success
+    expect(response.successful?).to eql true
   end
 end
