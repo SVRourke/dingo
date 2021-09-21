@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
+  before_action :authorized_redirect
   before_action :unauthorized_redirect
-
-  skip_before_action :unauthorized_redirect, only: :destroy
-
+  
+  skip_before_action :authorized_redirect, only: :destroy
+  skip_before_action :unauthorized_redirect, only: [:new, :create]
+  
   def new
     @disable_heading = true
     @user = User.new
@@ -20,10 +22,11 @@ class UsersController < ApplicationController
   end
 
   # update
-  # delete
+
   def destroy
-    current_user.destroy
-    redirect_to :root
+    current_user.destroy!
+    session.clear()
+    redirect_to root_path()
   end
 
   private
