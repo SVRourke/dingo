@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
   before_action :authorized_redirect
   before_action :unauthorized_redirect
-  
+
   skip_before_action :authorized_redirect, only: :destroy
   skip_before_action :unauthorized_redirect, only: [:new, :create]
-  
+
   def new
+    # authorize current_user, :new?
     @disable_heading = true
     @user = User.new
   end
@@ -16,8 +17,8 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_image_index_path(@user)
     else
-      flash[:error] = @user.error_messages
-      redirect_back
+      flash[:error] = "Invalid credentials"
+      redirect_to new_user_path()
     end
   end
 
