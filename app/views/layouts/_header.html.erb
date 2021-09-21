@@ -20,6 +20,9 @@
         <li class="nav-item">
           <%= link_to "logout", logout_path(@post), :method => :delete, class: "nav-link" %>
         </li>
+        <li class="nav-item">
+          <%= link_to "Delete User", user_path(@user), :method => :delete, class: "nav-link" %>
+        </li>
 
         <%= yield :additional_link %>
       </ul>
