@@ -1,27 +1,68 @@
-# README
+# Dingo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Dingo is an image repository app a la google photos. Users can upload, view tag and manage images easily with bulk uploads and deletions also available.
+<br>  
+**features:**
 
-Things you may want to cover:
+- Password secured user accounts
+- Access control: users may only access their own images
+- Tagging and indexing of images by tags
+- Bulk upload
+- Bulk deletion
 
-- Ruby version
+## Tech
 
-- System dependencies
+- Authenticaion: []()
+- Authorization: [varvet/pundit]()
+- Image Storage: [ActiveStorage]()
+- Views: [Action View Templates]()
+- Style: [Bootstrap 5]()
+- Testing: [RSpec]()
 
-- Configuration
+## How to install
 
-- Database creation
+1. clone repository
 
-- Database initialization
+```
+/code$ git clone https://github.com/SVRourke/dingo
+```
 
-- How to run the test suite
+2. install the dependencies
 
-- Services (job queues, cache servers, search engines, etc.)
+```
+/code$ cd dingo
+/dingo$ bundle install
+```
 
-- Deployment instructions
+3. set the session_secret
 
-- ...
-<!-- REQUIRES IMAGEMAGICK -->
+```
+/dingo$ export SESSION_SECRET=sadlkfmjsdkfmk34o356oiym67oim3
+```
 
-https://stackoverflow.com/questions/9811031/how-to-use-twitter-bootstrap-hover-popover-with-rails
+4. Migrate the db.
+
+```
+/dingo$ rails db:migrate
+```
+
+5. Run the server!
+
+```
+rails s
+```
+
+## Tests
+
+This project uses [RSpec]() for tests. Running the tests is easy:
+
+```
+# model tests
+/dingo$ rspec spec/models
+
+# model integration
+/dingo$ rspec spec/requests
+
+# All
+/dingo$ rspec spec
+```
