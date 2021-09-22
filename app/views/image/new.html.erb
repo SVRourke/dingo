@@ -11,17 +11,13 @@
         <div class="card-body">
         <h1 class="mb-4">New Upload</h1>
 
-            <%= form_with url: user_image_index_path do |f| %>
+            <%= form_with url: user_image_index_path(@user) do |f| %>
                 <%= f.fields_for :image do |i| %>
                     <div class="form-group mt-2">
-                        <label for="formFileSm" class="form-label">Small file input example</label>
-                        <%= i.file_field :image_file, class: "form-control form-control-sm" %>
+                        <label for="formFileSm" class="form-label">Upload As many files as you want</label>
+                        <%= i.file_field :image_file, class: "form-control form-control-sm", multiple: true %>
                     </div>
             
-                    <div class="form-group mt-2">
-                        <%= i.label :caption %>
-                        <%= i.text_field :caption, class: "form-control" %>
-                    </div>
                     <div class="form-group mt-3 mb-2">
                         <%= i.collection_check_boxes(:tag_ids, @tags, :id, :name) do |b| %>
                             <div class="form-check">
