@@ -8,7 +8,6 @@ class TagsController < ApplicationController
 
   def create
     @user = current_user
-    authorize Tag, :create?
     @tag = @user.tags.create(tag_params)
     if @tag.valid?
       redirect_to user_tags_path(@user)
