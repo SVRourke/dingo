@@ -1,0 +1,23 @@
+<% content_for :page_title do %>
+    Bulk Delete
+<% end %>
+<div class="mt-4">
+    <%= render partial: "partials/flash_message" %>
+
+    <%= form_with url: user_images_bulk_delete_path(@user), class: "" do |f| %>
+        <%= f.submit "delete selected", class: "btn btn-danger bg-danger" %>
+    <%= link_to "Delete All", user_images_all_path(@user), :method => :delete, class: "btn btn-danger bg-danger", id: "delete-all" %>
+
+            <div class="custom-image-grid pt-4 ">
+                <% @images.each do |image| %>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="gallery-image-image thumbnail" style="background-image: url(' <%= polymorphic_url(image.image_file) %>');"></div>
+                    <p><%= f.check_box :'user_ids', { multiple: true }, image.id, nil %> 
+                    <%= image.title %></p>
+                    
+                </div>
+                <% end %>
+            </div>
+    <% end %>
+</div>
+
