@@ -17,23 +17,10 @@ RSpec.describe "Images", type: :request do
 
   context "validations" do
     it "can create a valid image" do
-      post user_image_index_path(@user), params: { image: { title: "blah blah blah", image_file: @file } }
-      @image = Image.find_by(title: "blah blah blah")
-      expect(@image.valid?).to be true
-    end
-
-    it "adds tags when provided as part of the request" do
-      post user_image_index_path(@user), params: { image: { title: "blah blah blah", tag_ids: [@tag.id] } }
-      @image = Image.find_by(title: "blah blah blah")
-      expect(@image.tags.first.id).to be @tag.id
+      post user_image_index_path(@user), params: { image: { image_file: [@file] } }
+      expect(Image.first.valid?).to be true
     end
   end
-
-  # context "bulk upload" do
-  #   it "can create images from a multi-image upload" do
-  #     post
-  #   end
-  # end
 
   it "can delete images" do
     @image = @user.images.create(title: "hello")
