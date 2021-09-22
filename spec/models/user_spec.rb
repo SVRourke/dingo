@@ -4,7 +4,7 @@ RSpec.describe User do
   before(:each) do
     @user = User.create(username: "SVRourke", password: "BlahBlahBlah")
     3.times do
-      @user.images.create(caption: "laskjfswjflkwjfe")
+      @user.images.create(title: "laskjfswjflkwjfe")
     end
     @user.tags.create(name: "outdoors")
   end

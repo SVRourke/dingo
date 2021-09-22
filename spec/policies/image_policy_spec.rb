@@ -7,7 +7,7 @@ describe ImagePolicy do
   before(:each) do
     @tony = User.create(username: "TonySoprano", password: "password")
     @junior = User.create(username: "JuniorSoprano", password: "password")
-    @image = @tony.images.create(caption: "money")
+    @image = @tony.images.create(title: "money")
   end
 
   permissions :show? do

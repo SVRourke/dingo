@@ -2,8 +2,8 @@
 
 <%= form_with url: image_index_path do |f| %>
 <%= f.fields_for :image do |i| %>
-    <%= i.label :caption %>
-    <%= i.text_field :caption %>
+    <%= i.label :title %>
+    <%= i.text_field :title %>
     <%= i.collection_check_boxes :tag_ids, @tags, :id, :name %>
 
 <% end %>

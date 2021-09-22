@@ -4,7 +4,7 @@ RSpec.describe "Tags", type: :request do
   before(:each) do
     @user = User.create(username: "sam", password: "password")
     @tag = @user.tags.create(name: "outdoors")
-    @image = @user.images.create(caption: "blah blahblah")
+    @image = @user.images.create(title: "blah blahblah")
 
     post login_path, params: { username: "sam", password: "password" }
     expect(session[:user_id]).to eql @user.id
