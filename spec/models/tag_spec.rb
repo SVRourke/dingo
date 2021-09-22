@@ -19,7 +19,7 @@ RSpec.describe Tag do
 
   context "images" do
     it "has many images" do
-      @tag.images.push(@user.images.create(caption: "mountain"))
+      @tag.images.push(@user.images.create(title: "mountain"))
       expect(@tag.images.length).to eql 1
     end
   end
