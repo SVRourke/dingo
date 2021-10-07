@@ -12,12 +12,12 @@ Dingo is an image repository app a la google photos. Users can upload, view tag 
 
 ## Tech
 
-- Authenticaion: []()
-- Authorization: [varvet/pundit]()
-- Image Storage: [ActiveStorage]()
-- Views: [Action View Templates]()
-- Style: [Bootstrap 5]()
-- Testing: [RSpec]()
+- Authenticaion: [ActiveModel::SecurePassword](https://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html)
+- Authorization: [varvet/pundit](https://github.com/varvet/pundit)
+- Image Storage: [ActiveStorage](https://edgeguides.rubyonrails.org/active_storage_overview.html)
+- Views: [Action View Templates](https://api.rubyonrails.org/classes/ActionView/Template.html)
+- Style: [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+- Testing: [RSpec](https://rspec.info/)
 
 ## How to install
 
