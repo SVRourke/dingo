@@ -17,7 +17,7 @@ class ImageController < ApplicationController
     if @images.all? { |i| i.valid? }
       redirect_to user_image_index_path(current_user)
     else
-      flash[:error] = @image.error
+      flash[:error] = "Error"
       redirect_to :back
     end
   end
